@@ -1,13 +1,27 @@
 .data
+        print:.asciz "%d"
 	n:.word 10
+        msg1:.asciz "Entrez un entier n:"
+        aff1:.asciz "La somme des entiers inferieurs à n est %d \n"
 
 .text
 .global main
 main:
-	ldr r1, =n
+	ldr r0, =msg1
+        bl printf// demande un entier
+        ldr r0, =print
+        ldr r1, =n
+        bl scanf // entre un entier
+
+	ldr r1, =n // appelle la fonction
 	ldr r2, [r1]
 	mov r0, r2
 	bl sumI
+
+	mov r1, r0
+	ldr r0, =aff1
+	bl printf
+
 	bl exit
 
 sumI: // quand on appelle sum depuis le main, r0 = r2 = nbr dont on veut la somme inferieure

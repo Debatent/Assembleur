@@ -1,13 +1,39 @@
-.data 
+.data
+	print:.asciz "%d"
 	a1: .word 1
 	a2: .word 2
+	msg1:.asciz "Entrez un entier a1:"
+	msg2:.asciz "Entrez un second entier a2:"
+	aff1:.asciz "a1 vaut maintenant %d \n"
+	aff2:.asciz "a2 vaut maintenant %d \n"
 .text
 .global main
 main:
+	ldr r0, =msg1
+	bl printf// demande un entier
+	ldr r0, =print
+	ldr r1, =a1
+	bl scanf // entre un entier
+	ldr r0, =msg2
+	bl printf // demande le second entier
+        ldr r0, =print
+        ldr r1, =a2
+        bl scanf // entre le second entier
+
 	bl permute
+
+        ldr r0, =aff1
+        ldr r2, =a1
+        ldr r1, [r2]
+        bl printf
+        ldr r0, =aff2
+        ldr r2, =a2
+        ldr r1, [r2]
+        bl printf
+
 	bl exit
 
-permute:
+permute: // permute a1 et a2
 	sub sp, sp, #8
 	str lr, [sp]
 
