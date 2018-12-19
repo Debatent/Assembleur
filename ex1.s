@@ -1,7 +1,5 @@
 .data 
-.balign 4
 	a1: .word 1
-.balign 4
 	a2: .word 2
 .text
 .global main
